@@ -2,4 +2,8 @@ out
 dist
 node_modules
 .vscode-test/
-*.vsix
+
+
+# Ignore everything in release except .vsix files
+release/*
+!release/*.vsix
