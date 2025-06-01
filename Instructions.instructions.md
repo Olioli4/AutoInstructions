@@ -26,3 +26,5 @@ Please read these instructions carefully before making changes or running the co
 
 ## Support
 For questions or issues, contact the project maintainer.
+
+Always use gh for git commands
