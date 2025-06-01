@@ -1,0 +1,60 @@
+{
+  "name": "auto-instructions",
+  "displayName": "auto-instructions",
+  "description": "Automatically ensures instructions and tasks are present in every workspace.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:auto-instructions.changeStandardInstructions",
+    "onCommand:auto-instructions.reinitWorkspace"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "auto-instructions.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Auto Instructions",
+      "properties": {
+        "auto-instructions.standardInstructions": {
+          "type": "string",
+          "default": "# USER INSTRUCTIONS\n\nWelcome to the project!\n\nPlease read these instructions carefully before making changes or running the code.\n\n## Getting Started\n- Ensure you have all required dependencies installed.\n- Review the project structure and main files.\n- Use the provided VS Code tasks for setup and reminders.\n\n## Usage\n- Run main.py to start the application.\n- Use the custom form to interact with the ODS spreadsheet.\n- Refer to the Assets folder for all icon resources.\n\n## Contributing\n- Follow the modular structure.\n- Use PNG icons from the Assets folder; do not use base64 icons.\n- Write clear comments and docstrings for maintainability.\n- Commit only necessary files; avoid committing cache or test files.\n\n## Automation\n- On opening the workspace, you will be prompted to read these instructions via a VS Code task.\n- Click the provided link in the terminal to open this file directly.\n\n## Support\nFor questions or issues, contact the project maintainer.\n",
+          "description": "The default content for Instructions.instructions.md in new workspaces."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.100.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/auto-instructions.git"
+  }
+}
