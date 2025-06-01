@@ -25,4 +25,4 @@ This extension automatically creates and manages a user instructions file (`Inst
 - Commit only necessary files; avoid committing cache or test files.
 
 ## Support
-For questions or issues, contact the project maintainer.
+For questions or issues, contact the project maintainer at https://github.com/Olioli4/AutoInstructions.
