@@ -2,7 +2,7 @@
   "name": "auto-instructions",
   "displayName": "auto-instructions",
   "description": "Ensures every workspace contains a .github/copilot-instructions.md file, managed from a user-configurable template.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -25,20 +25,7 @@
         "command": "auto-instructions.replaceCopilotInstructions",
         "title": "Auto Instructions: Replace Copilot Instructions File"
       }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "Auto Instructions",
-      "properties": {
-        "auto-instructions.copilotTemplate": {
-          "type": "string",
-          "default": "alway begin answers with \"Dear Olivier\"",
-          "description": "The template for .github/copilot-instructions.md. Use the command to edit.",
-          "markdownDescription": "**To edit the copilot instructions template, use the [Auto Instructions: Edit Copilot Template](command:auto-instructions.editCopilotTemplate) command from the Command Palette.**",
-          "scope": "application"
-        }
-      }
-    }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
