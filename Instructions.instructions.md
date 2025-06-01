@@ -1,28 +1,15 @@
 # USER INSTRUCTIONS
 
-Welcome to the project!
+This project uses the Auto Instructions VS Code extension to ensure every workspace contains a `.github/copilot-instructions.md` file, managed from a user-configurable template.
 
-Please read these instructions carefully before making changes or running the code.
+## How it works
+- On opening the workspace, the extension checks for `.github/copilot-instructions.md` and creates it from your template if missing.
+- The template is stored in your user (global) VS Code settings.
+- Use the Command Palette to edit the template or to replace the copilot instructions file with the template.
 
-## Getting Started
-- Ensure you have all required dependencies installed.
-- Review the project structure and main files.
-- Use the provided VS Code tasks for setup and reminders.
-
-## Usage
-- Run main.py to start the application.
-- Use the custom form to interact with the ODS spreadsheet.
-- Refer to the Assets folder for all icon resources.
-
-## Contributing
-- Follow the modular structure.
-- Use PNG icons from the Assets folder; do not use base64 icons.
-- Write clear comments and docstrings for maintainability.
-- Commit only necessary files; avoid committing cache or test files.
-
-## Automation
-- On opening the workspace, you will be prompted to read these instructions via a VS Code task.
-- Click the provided link in the terminal to open this file directly.
+## Commands
+- `Auto Instructions: Edit Copilot Template` — Edit the template in a markdown editor.
+- `Auto Instructions: Replace Copilot Instructions File` — Overwrite `.github/copilot-instructions.md` with the template.
 
 ## Support
 For questions or issues, contact the project maintainer.

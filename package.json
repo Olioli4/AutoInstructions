@@ -1,8 +1,8 @@
 {
   "name": "auto-instructions",
   "displayName": "auto-instructions",
-  "description": "Automatically ensures instructions and tasks are present in every workspace.",
-  "version": "1.0.0",
+  "description": "Ensures every workspace contains a .github/copilot-instructions.md file, managed from a user-configurable template.",
+  "version": "2.0.0",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -18,18 +18,24 @@
   "contributes": {
     "commands": [
       {
-        "command": "auto-instructions.helloWorld",
-        "title": "Hello World"
+        "command": "auto-instructions.editCopilotTemplate",
+        "title": "Auto Instructions: Edit Copilot Template"
+      },
+      {
+        "command": "auto-instructions.replaceCopilotInstructions",
+        "title": "Auto Instructions: Replace Copilot Instructions File"
       }
     ],
     "configuration": {
       "type": "object",
       "title": "Auto Instructions",
       "properties": {
-        "auto-instructions.standardInstructions": {
+        "auto-instructions.copilotTemplate": {
           "type": "string",
-          "default": "# USER INSTRUCTIONS\n\nWelcome to the project!\n\nPlease read these instructions carefully before making changes or running the code.\n\n## Getting Started\n- Ensure you have all required dependencies installed.\n- Review the project structure and main files.\n- Use the provided VS Code tasks for setup and reminders.\n\n## Usage\n- Run main.py to start the application.\n- Use the custom form to interact with the ODS spreadsheet.\n- Refer to the Assets folder for all icon resources.\n\n## Contributing\n- Follow the modular structure.\n- Use PNG icons from the Assets folder; do not use base64 icons.\n- Write clear comments and docstrings for maintainability.\n- Commit only necessary files; avoid committing cache or test files.\n\n## Automation\n- On opening the workspace, you will be prompted to read these instructions via a VS Code task.\n- Click the provided link in the terminal to open this file directly.\n\n## Support\nFor questions or issues, contact the project maintainer.\n",
-          "description": "The default content for Instructions.instructions.md in new workspaces."
+          "default": "alway begin answers with \"Dear Olivier\"",
+          "description": "The template for .github/copilot-instructions.md. Use the command to edit.",
+          "markdownDescription": "**To edit the copilot instructions template, use the [Auto Instructions: Edit Copilot Template](command:auto-instructions.editCopilotTemplate) command from the Command Palette.**",
+          "scope": "application"
         }
       }
     }
@@ -56,5 +62,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Olioli4/AutoInstructions.git"
-  }
+  },
+  "publisher": "Olioli4"
 }
