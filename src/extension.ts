@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os';
 
 const DEFAULT_TEMPLATE = `# Copilot Instructions
 
@@ -74,22 +75,31 @@ export function activate(context: vscode.ExtensionContext) {
         ensureGithubAndCopilotFile(workspaceFolder);
     }
 
-    // Command to edit the template in a real editor
-    let editTemplateCmd = vscode.commands.registerCommand('auto-instructions.editCopilotTemplate', async () => {
+    // Command to edit the user-level template in a real editor (using a temp file, never prompts for save location)
+    let editTemplateCmd = vscode.commands.registerCommand('auto-instructions.editUserCopilotTemplate', async () => {
         const config = vscode.workspace.getConfiguration('auto-instructions');
         const current = config.get<string>('copilotTemplate', DEFAULT_TEMPLATE);
-        const doc = await vscode.workspace.openTextDocument({
-            content: current,
-            language: 'markdown'
-        });
+        // Create a temp file in the extension's global storage path
+        const tempDir = context.globalStorageUri.fsPath;
+        if (!fs.existsSync(tempDir)) {
+            fs.mkdirSync(tempDir, { recursive: true });
+        }
+        const tempFile = path.join(tempDir, 'copilot-instructions-edit.md');
+        fs.writeFileSync(tempFile, current, { encoding: 'utf8' });
+        const doc = await vscode.workspace.openTextDocument(tempFile);
         await vscode.window.showTextDocument(doc, { preview: false });
-        const saveDisposable = vscode.workspace.onDidSaveTextDocument(async (savedDoc) => {
-            if (savedDoc.uri.toString() === doc.uri.toString()) {
-                await config.update('copilotTemplate', savedDoc.getText(), vscode.ConfigurationTarget.Global);
-                vscode.window.showInformationMessage('Copilot instructions template updated.');
+        // Listen for save and close events
+        const saveOrClose = async (changedDoc: vscode.TextDocument) => {
+            if (changedDoc.uri.fsPath === tempFile) {
+                await config.update('copilotTemplate', changedDoc.getText(), vscode.ConfigurationTarget.Global);
+                vscode.window.showInformationMessage('User-level copilot instructions template updated.');
+                // Clean up temp file
+                try { fs.unlinkSync(tempFile); } catch {}
             }
-        });
-        context.subscriptions.push(saveDisposable);
+        };
+        const saveDisposable = vscode.workspace.onDidSaveTextDocument(saveOrClose);
+        const closeDisposable = vscode.workspace.onDidCloseTextDocument(saveOrClose);
+        context.subscriptions.push(saveDisposable, closeDisposable);
     });
     context.subscriptions.push(editTemplateCmd);
 

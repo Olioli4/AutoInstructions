@@ -1,4 +1,4 @@
-# Copilot Instructions
+eeee# Copilot Instructions
 
 Welcome to this project! Please follow these best practices to ensure high-quality, maintainable, and collaborative code.
 
@@ -38,7 +38,7 @@ Welcome to this project! Please follow these best practices to ensure high-quali
 ## Automation
 
 - Use scripts or tasks for common workflows (build, test, lint, deploy).
-- Document all automation in a dedicated `automation/` folder. All automation scripts and documentation are now located in the `automation/` folder as required.
+- Document all automation in a dedicated `automation/` folder.
 
 ## Support
 

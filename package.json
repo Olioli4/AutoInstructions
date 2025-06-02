@@ -2,7 +2,7 @@
   "name": "auto-instructions",
   "displayName": "auto-instructions",
   "description": "Ensures every workspace contains a .github/copilot-instructions.md file, managed from a user-configurable template.",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -18,14 +18,26 @@
   "contributes": {
     "commands": [
       {
-        "command": "auto-instructions.editCopilotTemplate",
-        "title": "Auto Instructions: Edit Copilot Template"
+        "command": "auto-instructions.editUserCopilotTemplate",
+        "title": "Auto Instructions: Edit User Copilot Template"
       },
       {
         "command": "auto-instructions.replaceCopilotInstructions",
         "title": "Auto Instructions: Replace Copilot Instructions File"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Auto Instructions",
+      "properties": {
+        "auto-instructions.copilotTemplate": {
+          "type": "string",
+          "scope": "application",
+          "markdownDescription": "The user-level Copilot instructions template. Use the 'Auto Instructions: Edit User Copilot Template' command to edit. (Do not edit here.)",
+          "default": "# Copilot Instructions\n\nWelcome to this project! Please follow these best practices to ensure high-quality, maintainable, and collaborative code.\n\n## General Guidelines\n\n- Always write clear, concise, and well-documented code.\n- Use modularization: break code into small, reusable functions and components.\n- Follow the project's coding style and naming conventions.\n- Write meaningful commit messages and keep commits focused.\n- Use version control best practices (feature branches, pull requests, code reviews).\n- **Always resume code changes before editing and always ask for OK before editing the code.**\n\n## Project Structure\n\n- Organize code into logical folders (e.g., `src/`, `test/`, `docs/`, `assets/`).\n- Place documentation in `README.md` and update it as the project evolves.\n- Store configuration and environment files separately from source code.\n\n## Documentation\n\n- Every module, class, and function should have a clear docstring or comment explaining its purpose and usage.\n- Update `README.md` with setup instructions, usage examples, and contribution guidelines.\n- Document any non-obvious design decisions or dependencies.\n\n## Testing\n\n- Write automated tests for all critical functionality.\n- Place tests in a dedicated `test/` folder, mirroring the structure of `src/`.\n- Use descriptive test names and include edge cases.\n\n## Collaboration\n\n- Communicate changes and design decisions with the team.\n- Review and test code before merging.\n- Respect existing code and refactor only with clear justification.\n\n## Automation\n\n- Use scripts or tasks for common workflows (build, test, lint, deploy).\n- Document all automation in a dedicated `automation/` folder.\n\n## Support\n\nFor questions or issues, contact the project maintainer or open an issue in the repository."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
